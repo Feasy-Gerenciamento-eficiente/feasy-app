@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name = "primary_background_login">#c9efe0 </color>
+    <color name = "btn_login">#5dbea3 </color>
+    <color name = "textfield_backgroundcolor">#f3f3f5</color>
+    <color name = "background_color_pacient_manager">#EAF8F6</color>
+    <color name = "basicWhite">#FFFFFF</color>
+    <color name = "titles">#2C3E50</color>
+    <color name = "secondary_text">#95A5A6</color>
+    <color name = "error_color">#E57373</color>
+
+<!--     Cores de Avatar de usuário sem foto de perfil-->
+
+    <color name="avatar_blue">#AED9E0</color>
+    <color name="avatar_lavender">#D7C0D0</color>
+    <color name="avatar_peach">#F7DBA7</color>
+    <color name="avatar_mint">#B8E1DD</color>
+    <color name="avatar_coral">#F4C2C2</color>
+
 </resources>
