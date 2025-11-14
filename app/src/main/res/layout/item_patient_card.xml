@@ -9,7 +9,7 @@
     app:cardElevation="4dp"
     app:cardBackgroundColor="@color/basicWhite"
     android:layout_marginHorizontal="12dp"
-    android:layout_marginTop="12dp">
+    android:layout_marginTop="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,16 +23,15 @@
             android:background="@drawable/avatar_background"
             android:backgroundTint="#AED9E0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:cornerRadius ="12dp"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textInitials"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="JS"
-            android:textSize="20sp"
             android:textColor="#2C3E50"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/viewAvatarBackground"
             app:layout_constraintEnd_toEndOf="@id/viewAvatarBackground"
@@ -47,7 +46,7 @@
             android:layout_marginTop="12dp"
             android:text="João Silva"
 
-            android:textColor="#2C3E50"
+            android:textColor="@color/figma_foreground"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/viewAvatarBackground"
@@ -69,12 +68,12 @@
             android:layout_height="24dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/edit_icon"
-            app:tint="#69C7B5"
-
-
             app:layout_constraintEnd_toEndOf="parent"
 
-            app:layout_constraintTop_toTopOf="parent" />
+
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:tint="#69C7B5" />
 
 
         <ImageView
@@ -82,7 +81,8 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/visibility_icon"
             app:layout_constraintEnd_toStartOf="@+id/iconEdit"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="#69C7B5" />
@@ -92,10 +92,10 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="16dp"
-            android:src="@android:drawable/ic_menu_my_calendar"
+            android:src="@drawable/calendar_icon"
+            app:layout_constraintTop_toBottomOf="@id/viewAvatarBackground"
             app:tint="#69C7B5"
-            app:layout_constraintEnd_toStartOf=""
-            app:layout_constraintTop_toBottomOf="@id/viewAvatarBackground" />
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
             android:id="@+id/textDobTitle"
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Data de Nascimento"
-            android:textColor="#95A5A6"
+            android:textColor="@color/figma_muted_foreground"
             android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@id/iconCalendar"
             app:layout_constraintTop_toTopOf="@id/iconCalendar" />
@@ -113,7 +113,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="22/07/2019 • 5 anos"
-            android:textColor="#2C3E50"
+            android:textColor="@color/figma_foreground"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/textDobTitle"
             app:layout_constraintTop_toBottomOf="@id/textDobTitle" />
@@ -123,10 +123,10 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginTop="16dp"
-            android:src="@android:drawable/stat_notify_error"
-            app:tint="#69C7B5"
+            android:src="@drawable/diagnosis"
             app:layout_constraintStart_toStartOf="@id/iconCalendar"
-            app:layout_constraintTop_toBottomOf="@id/textDobValue" />
+            app:layout_constraintTop_toBottomOf="@id/textDobValue"
+            app:tint="#69C7B5" />
 
         <TextView
             android:id="@+id/textDiagnosisTitle"
@@ -134,9 +134,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="Diagnóstico"
-            android:textColor="@color/secondary_text"
-            android:textStyle="bold"
+            android:textColor="@color/figma_muted_foreground"
             android:textSize="12sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/iconDiagnosis"
             app:layout_constraintTop_toTopOf="@id/iconDiagnosis" />
 
