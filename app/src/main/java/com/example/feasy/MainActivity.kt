@@ -12,6 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.feasy.ui.theme.FeasyTheme
+// Importe a tela que você criou (se ela estiver em outro arquivo)
+// import com.example.feasy.ui.TelaCadastroFisioterapeuta
+import androidx.compose.material3.Surface
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,16 +23,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             FeasyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    Surface(modifier = Modifier.padding(innerPadding)) {
+                        // A única coisa que o onCreate faz é mostrar a tela de cadastro
+                        TelaCadastroFisioterapeuta()
+                    }
                 }
             }
         }
+
+        // O BLOCO DE TESTE ANTIGO (lifecycleScope.launch) FOI REMOVIDO DAQUI
     }
 }
 
+// As funções Greeting abaixo não são mais usadas, mas não quebram o app.
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
