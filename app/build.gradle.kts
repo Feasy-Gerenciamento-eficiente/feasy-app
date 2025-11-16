@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -27,13 +28,16 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
         viewBinding = true
@@ -64,4 +68,9 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // 🔥 DEPENDÊNCIAS DO SUPABASE — COMPLETAS
+    implementation("io.github.jan-tennert.supabase:kt:2.5.1")
+    implementation("io.github.jan-tennert.supabase:gotrue-kt:2.5.1")
+    implementation("io.github.jan-tennert.supabase:postgrest-kt:2.5.1")
 }

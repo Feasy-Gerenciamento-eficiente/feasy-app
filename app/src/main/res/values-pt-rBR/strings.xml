@@ -13,4 +13,13 @@
     <string name="label_search">Buscar</string>
     <string name="label_pacients">Pacientes</string>
     <string name="label_newpacients">Novo Paciente</string>
+    <string name="label_addpacients">Adicionar novo paciente</string>
+    <string name="label_namepacients">Nome completo</string>
+    <string name="label_birthpacients">Data de Nascimento</string>
+    <string name="label_diagnosis">Diagnóstico</string>
+    <string name="label_profileconfig">Edição de foto de perfil</string>
+    <string name="label_cancel">Cancelar</string>
+    <string name="example_name">Ex: Maria Silva</string>
+    <string name="example_birth">Ex: Maria Silva</string>
+    <string name="diagnosis_example">Ex : Autismo - Grau 2 , Lesão</string>
 </resources>

@@ -3,15 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_pacients">
+    android:background="@color/background_pacients"
+    android:focusable="true"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
 
-    <!--
-        CORREÇÃO 1: Adicionei constraints verticais ao botão
-        para ele não pular para o topo. A margem de 51dp
-        foi baseada no seu "tools:layout_editor_absoluteY"
-    -->
     <Button
         android:id="@+id/btnNewPatient"
         android:layout_width="160dp"
@@ -25,9 +24,9 @@
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textStyle="bold"
+        app:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/textTitle"
@@ -36,16 +35,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="@string/label_pacients"
-        android:textAlignment="center"
         android:textColor="@color/figma_icon_teal"
         android:textSize="18sp"
-        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/btnNewPatient"
         app:layout_constraintEnd_toStartOf="@id/btnNewPatient"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnNewPatient"
-        app:layout_constraintVertical_bias="0.583" />
+        app:layout_constraintTop_toTopOf="@+id/btnNewPatient"/>
 
     <TextView
         android:id="@+id/textcount"
@@ -56,9 +51,8 @@
         android:text="(2)"
         android:textColor="@color/figma_muted_foreground"
         android:textSize="18sp"
-        android:textStyle="normal"
         app:layout_constraintStart_toEndOf="@id/textTitle"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchLayout"
@@ -67,32 +61,34 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnNewPatient"
-
         app:boxBackgroundMode="filled"
         app:boxBackgroundColor="@color/basicWhite"
-
         app:boxCornerRadiusTopStart="16dp"
         app:boxCornerRadiusTopEnd="16dp"
         app:boxCornerRadiusBottomStart="16dp"
         app:boxCornerRadiusBottomEnd="16dp"
-        android:hint="@string/label_search"
         app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+        app:boxStrokeWidthFocused="0dp"
+        app:startIconDrawable="@drawable/search"
+        app:startIconTint="@color/figma_muted_foreground"
+        app:hintEnabled="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnNewPatient">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editSearch"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@drawable/searchbar"
             android:padding="12dp"
-            android:textColor="@color/textPrimary"/>
+            android:hint="@string/label_search"
+            android:textColor="@color/textPrimary"
+            android:gravity="center_vertical"
+            android:textCursorDrawable="@null"
+            android:singleLine="true"
+            android:inputType="text"
+            android:imeOptions="actionSearch" />
     </com.google.android.material.textfield.TextInputLayout>
-
-
-
 
     <LinearLayout
         android:id="@+id/btnFilters"
@@ -103,11 +99,10 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         android:background="@drawable/searchbar"
-
-        app:layout_constraintTop_toBottomOf="@id/searchLayout"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout">
 
         <ImageView
             android:layout_width="18dp"
@@ -131,11 +126,10 @@
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
         android:paddingBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/btnFilters"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFilters"
-        tools:listitem="@layout/item_patient_card" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_patient_card"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

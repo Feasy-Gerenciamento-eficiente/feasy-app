@@ -9,7 +9,20 @@
     app:cardElevation="4dp"
     app:cardBackgroundColor="@color/basicWhite"
     android:layout_marginHorizontal="12dp"
-    android:layout_marginTop="4dp">
+    android:layout_marginTop="4dp"
+    android:clickable="true"
+    android:focusable="true"
+
+
+    app:pressedTranslationZ="8dp"
+    android:foreground="?attr/selectableItemBackground"
+
+    > <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="18dp">
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

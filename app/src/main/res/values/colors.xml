@@ -11,11 +11,12 @@
 
 <!--     Cores de Avatar de usuário sem foto de perfil-->
 
-    <color name="avatar_blue">#AED9E0</color>
-    <color name="avatar_lavender">#D7C0D0</color>
-    <color name="avatar_peach">#F7DBA7</color>
-    <color name="avatar_mint">#B8E1DD</color>
-    <color name="avatar_coral">#F4C2C2</color>
+    <color name="avatar_pink">#F4C2D8</color>
+    <color name="avatar_cyan">#B2EBF2</color>
+    <color name="avatar_green">#C8E6C9</color>
+    <color name="avatar_peach">#FFDAB9</color>
+    <color name="avatar_lavender">#D1C4E9</color>
+    <color name="avatar_mint">#C8F7C5</color>
 
     <color name="figma_icon_teal">#00A0B0</color>
     <color name="figma_text_red_destructive">#d4183d</color>

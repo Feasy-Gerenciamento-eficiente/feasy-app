@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    app:cardCornerRadius="16dp"
+    android:layout_marginTop="40dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_addpacients"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/cardview_dark_background"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preencha os dados do novo paciente."
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="12dp"
+            app:layout_constraintTop_toBottomOf="@id/text_view_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/label_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_namepacients"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/cardview_dark_background"
+            app:layout_constraintTop_toBottomOf="@id/text_view_subtitle"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_text_nome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/roundedbar"
+            android:hint="@string/example_name"
+            android:inputType="textPersonName|textCapWords"
+            android:padding="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_nome" />
+
+        <TextView
+            android:id="@+id/label_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_birthpacients"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_nome"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_text_data_nascimento"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/example_birth"
+            android:inputType="date"
+            android:background="@drawable/roundedbar"
+            android:padding="12dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/label_data"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/label_diagnostico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_diagnosis"
+            android:textColor="@color/cardview_dark_background"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_data_nascimento"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/edit_text_diagnostico"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/diagnosis_example"
+            android:inputType="textMultiLine"
+            android:background="@drawable/roundedbar"
+            android:padding="12dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/label_diagnostico"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/label_cor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_profileconfig"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/cardview_dark_background"
+            app:layout_constraintTop_toBottomOf="@id/edit_text_diagnostico"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="4dp"
+            app:chipSpacingHorizontal="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/label_cor"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_color_pink"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:checkable="true"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/avatar_pink"
+                app:chipCornerRadius="80dp"
+                app:chipIconVisible="false"
+                app:chipStrokeColor="@color/avatar_stroke_selector" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_color_cyan"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:checkable="true"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/avatar_cyan"
+                app:chipCornerRadius="58dp"
+                app:chipIconVisible="false"
+                app:chipStrokeColor="@color/avatar_stroke_selector"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_color_green"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:checkable="true"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/avatar_green"
+                app:chipCornerRadius="58dp"
+                app:chipIconVisible="false"
+                app:chipStrokeColor="@color/avatar_stroke_selector" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_color_peach"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:checkable="true"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/avatar_peach"
+                app:chipCornerRadius="58dp"
+                app:chipIconVisible="false"
+                app:chipStrokeColor="@color/avatar_stroke_selector" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_color_lavender"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:checkable="true"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/avatar_lavender"
+                app:chipCornerRadius="58dp"
+                app:chipIconVisible="false"
+                app:chipStrokeColor="@color/avatar_stroke_selector" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_color_mint"
+                android:layout_width="54dp"
+                android:layout_height="48dp"
+                android:checkable="true"
+                app:checkedIconVisible="false"
+                app:chipBackgroundColor="@color/avatar_mint"
+                app:chipCornerRadius="58dp"
+                app:chipIconVisible="false"
+                app:chipStrokeColor="@color/avatar_stroke_selector" />
+
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <Button
+            android:id="@+id/btnNewPatient"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:background="@drawable/patientlistgradient"
+            android:text="@string/label_newpacients"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:backgroundTint="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/chip_group_color" /> <Button
+        android:id="@+id/button_cancelar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/label_cancel"
+        android:textColor="@color/cardview_dark_background"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btnNewPatient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/button_close"
+        android:layout_width="36dp"
+        android:layout_height="48dp"
+        android:layout_marginLeft="340dp"
+        android:layout_marginRight="20dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/close_icon" />
+
+</com.google.android.material.card.MaterialCardView>
