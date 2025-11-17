@@ -1,41 +1,63 @@
-package com.example.feasy
+package com.example.feasy.ui.login
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.feasy.MainActivity
+import com.example.feasy.databinding.ActivityLoginBinding
+import com.example.feasy.network.SupabaseClient
+import io.github.jan.supabase.gotrue.auth
+import io.github.jan.supabase.gotrue.providers.builtin.Email
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
-    private val emailCorreto = "teste@email.com"
-    private val senhaCorreta = "123456"
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
-        val emailInput = findViewById<EditText>(R.id.email_input)
-        val passwordInput = findViewById<EditText>(R.id.password_input)
-        val btnEntrar = findViewById<Button>(R.id.btnEntrar)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnEntrar.setOnClickListener {
-            val email = emailInput.text.toString().trim()
-            val senha = passwordInput.text.toString().trim()
+        val usernameEditText = binding.username
+        val passwordEditText = binding.password
+        val loginButton = binding.login
+        val loadingProgressBar = binding.loading
 
-            if (email.isEmpty() || senha.isEmpty()) {
-                Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
-                Log.d("LOGIN", "Erro: campos vazios!")
+        loginButton.setOnClickListener {
+            val email = usernameEditText.text.toString()
+            val senha = passwordEditText.text.toString()
+
+            if (email.isBlank() || senha.isBlank()) {
+                Toast.makeText(this, "Preencha email e senha", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (email == emailCorreto && senha == senhaCorreta) {
-                Toast.makeText(this, "Login realizado!", Toast.LENGTH_SHORT).show()
-                Log.d("LOGIN", "Login efetuado com sucesso!")
-            } else {
-                Toast.makeText(this, "Email ou senha incorretos", Toast.LENGTH_SHORT).show()
-                Log.d("LOGIN", "Login inválido: email ou senha incorretos.")
+            // Mostra o loading
+            loadingProgressBar.visibility = android.view.View.VISIBLE
+
+            lifecycleScope.launch {
+                try {
+                    SupabaseClient.client.auth.signInWith(Email) {
+                        this.email = email
+                        this.password = senha
+                    }
+
+                    Toast.makeText(applicationContext, "Login realizado!", Toast.LENGTH_LONG).show()
+
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Toast.makeText(applicationContext, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
+                } finally {
+                    loadingProgressBar.visibility = android.view.View.GONE
+                }
             }
         }
     }

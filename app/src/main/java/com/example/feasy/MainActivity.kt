@@ -22,18 +22,14 @@ class MainActivity : ComponentActivity() {
             FeasyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Surface(modifier = Modifier.padding(innerPadding)) {
-                        // A única coisa que o onCreate faz é mostrar a tela de cadastro
                         TelaCadastroFisioterapeuta()
                     }
                 }
             }
         }
-
-        // O BLOCO DE TESTE ANTIGO (lifecycleScope.launch) FOI REMOVIDO DAQUI
     }
 }
 
-// As funções Greeting abaixo não são mais usadas, mas não quebram o app.
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
