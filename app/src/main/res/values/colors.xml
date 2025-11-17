@@ -18,4 +18,18 @@
     <color name="avatar_mint">#B8E1DD</color>
     <color name="avatar_coral">#F4C2C2</color>
 
+    <color name="figma_icon_teal">#00A0B0</color>
+    <color name="figma_text_red_destructive">#d4183d</color>
+
+
+        <color name="figma_foreground">#252525</color>
+        <color name="figma_muted_foreground">#717182</color>
+        <color name="figma_muted_background">#ECECF0</color>
+        <color name="figma_border">#1A000000</color>
+        <color name="figma_screen_background">#F0FDFB</color>
+
+    <color name="tealPrimary">#07C1A6</color>
+    <color name="textPrimary">#2A2A2A</color>
+    <color name ="background_pacients">#eefdfc</color>
+
 </resources>

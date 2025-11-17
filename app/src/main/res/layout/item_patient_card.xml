@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@color/basicWhite"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginTop="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="18dp">
+
+        <View
+            android:id="@+id/viewAvatarBackground"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/avatar_background"
+            android:backgroundTint="#AED9E0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textInitials"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="JS"
+            android:textColor="#2C3E50"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/viewAvatarBackground"
+            app:layout_constraintEnd_toEndOf="@id/viewAvatarBackground"
+            app:layout_constraintStart_toStartOf="@id/viewAvatarBackground"
+            app:layout_constraintTop_toTopOf="@id/viewAvatarBackground" />
+
+        <TextView
+            android:id="@+id/textPatientName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:text="João Silva"
+
+            android:textColor="@color/figma_foreground"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/viewAvatarBackground"
+            app:layout_constraintTop_toTopOf="@id/viewAvatarBackground" />
+
+        <TextView
+            android:id="@+id/textPatientId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID:2"
+            android:textColor="#95A5A6"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/textPatientName"
+            app:layout_constraintTop_toBottomOf="@id/textPatientName" />
+
+        <ImageView
+            android:id="@+id/iconEdit"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/edit_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+
+
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:tint="#69C7B5" />
+
+
+        <ImageView
+            android:id="@+id/iconEye"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/visibility_icon"
+            app:layout_constraintEnd_toStartOf="@+id/iconEdit"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#69C7B5" />
+
+        <ImageView
+            android:id="@+id/iconCalendar"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/calendar_icon"
+            app:layout_constraintTop_toBottomOf="@id/viewAvatarBackground"
+            app:tint="#69C7B5"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/textDobTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Data de Nascimento"
+            android:textColor="@color/figma_muted_foreground"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@id/iconCalendar"
+            app:layout_constraintTop_toTopOf="@id/iconCalendar" />
+
+        <TextView
+            android:id="@+id/textDobValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="22/07/2019 • 5 anos"
+            android:textColor="@color/figma_foreground"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/textDobTitle"
+            app:layout_constraintTop_toBottomOf="@id/textDobTitle" />
+
+        <ImageView
+            android:id="@+id/iconDiagnosis"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/diagnosis"
+            app:layout_constraintStart_toStartOf="@id/iconCalendar"
+            app:layout_constraintTop_toBottomOf="@id/textDobValue"
+            app:tint="#69C7B5" />
+
+        <TextView
+            android:id="@+id/textDiagnosisTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Diagnóstico"
+            android:textColor="@color/figma_muted_foreground"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/iconDiagnosis"
+            app:layout_constraintTop_toTopOf="@id/iconDiagnosis" />
+
+        <TextView
+            android:id="@+id/textDiagnosisValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="TEA Nível 1"
+            android:textColor="@color/error_color"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textDiagnosisTitle"
+            app:layout_constraintTop_toBottomOf="@id/textDiagnosisTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
