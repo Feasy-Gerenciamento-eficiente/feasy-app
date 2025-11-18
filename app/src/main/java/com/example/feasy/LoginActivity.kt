@@ -22,22 +22,15 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val usernameEditText = binding.username
-        val passwordEditText = binding.password
-        val loginButton = binding.login
-        val loadingProgressBar = binding.loading
+        binding.btnEntrar.setOnClickListener {
 
-        loginButton.setOnClickListener {
-            val email = usernameEditText.text.toString()
-            val senha = passwordEditText.text.toString()
+            val email = binding.emailInput.text.toString()
+            val senha = binding.passwordInput.text.toString()
 
             if (email.isBlank() || senha.isBlank()) {
                 Toast.makeText(this, "Preencha email e senha", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-            // Mostra o loading
-            loadingProgressBar.visibility = android.view.View.VISIBLE
 
             lifecycleScope.launch {
                 try {
@@ -48,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
                     Toast.makeText(applicationContext, "Login realizado!", Toast.LENGTH_LONG).show()
 
+                    // Vai para a MainActivity
                     val intent = Intent(this@LoginActivity, MainActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -55,8 +49,6 @@ class LoginActivity : AppCompatActivity() {
                 } catch (e: Exception) {
                     e.printStackTrace()
                     Toast.makeText(applicationContext, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
-                } finally {
-                    loadingProgressBar.visibility = android.view.View.GONE
                 }
             }
         }
