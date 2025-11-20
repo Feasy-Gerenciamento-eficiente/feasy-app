@@ -13,9 +13,9 @@
         android:theme="@style/Theme.Feasy">
 
         <!-- Tela de Pacientes -->
-<!--        <activity-->
-<!--            android:name=".PacientsActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".PacientsActivity"
+            android:exported="false" />
 
         <!-- Tela inicial → Login -->
         <activity

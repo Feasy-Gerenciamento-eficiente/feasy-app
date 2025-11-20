@@ -6,6 +6,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -33,6 +35,10 @@ class LoginActivity : AppCompatActivity() {
             if (email == emailCorreto && senha == senhaCorreta) {
                 Toast.makeText(this, "Login realizado!", Toast.LENGTH_SHORT).show()
                 Log.d("LOGIN", "Login efetuado com sucesso!")
+
+                val intent = Intent(this, PacientsActivity::class.java)
+                startActivity(intent)
+                finish() // para impedir que o usuário volte ao login
             } else {
                 Toast.makeText(this, "Email ou senha incorretos", Toast.LENGTH_SHORT).show()
                 Log.d("LOGIN", "Login inválido: email ou senha incorretos.")
