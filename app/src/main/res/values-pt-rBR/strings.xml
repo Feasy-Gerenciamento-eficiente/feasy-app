@@ -13,4 +13,26 @@
     <string name="label_search">Buscar</string>
     <string name="label_pacients">Pacientes</string>
     <string name="label_newpacients">Novo Paciente</string>
+    <string name="label_addpacients">Adicionar Novo Paciente</string>
+    <string name="label_namepacients">Nome completo</string>
+    <string name="label_birthpacients">Data de nascimento</string>
+    <string name="label_diagnosis">Diagnóstico</string>
+    <string name="label_profileconfig">Configuração de perfil</string>
+    <string name="label_cancel">Cancelar</string>
+    <string name="example_name">Ex: Maria Silva</string>
+    <string name="example_birth">Ex : 11/03/2009</string>
+    <string name="diagnosis_example">Ex: Autismo Grau 2 de Suporte</string>
+    <string name="filldatapacients">Preencha com as informações do novo paciente</string>
+    <string name="closebutton">Fechar</string>
+    <string name="logoimg">Logo</string>
+    <string name="wellcome">Bem-Vindo</string>
+    <string name="filter">Filtros</string>
+    <string name="or">ou</string>
+    <string name="noacount">Não tem uma conta?</string>
+    <string name="signup">"Cadastre-se "</string>
+    <string name="loginneed">Faça login para continuar</string>
+    <string name="youremail">seuemail@email.com</string>
+    <string name="forgotpass">Esqueceu sua senha?</string>
+    <string name="entertag">Email ou Nome de usuário</string>
+    <string name="typepass">Digite sua senha</string>
 </resources>

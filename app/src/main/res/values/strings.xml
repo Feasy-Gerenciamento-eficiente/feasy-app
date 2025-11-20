@@ -12,4 +12,31 @@
     <string name="label_search">Search</string>
     <string name="label_pacients">Pacients</string>
     <string name="label_newpacients">New Pacient</string>
+    <string name="label_addpacients">Add new pacient</string>
+    <string name="label_namepacients">Full Name</string>
+    <string name="label_birthpacients">Birthdate </string>
+    <string name="label_diagnosis">Diagnosis </string>
+    <string name="label_profileconfig">Profile photo edit </string>
+    <string name="label_cancel">Cancel </string>
+    <string name="example_name">Ex: Maria Silva </string>
+    <string name="example_birth">"Ex: Maria Silva "</string>
+    <string name="diagnosis_example">Ex: Autism Level 2, injurie</string>
+    <string name = "filldatapacients">"Fill with new pacient data "</string>
+    <string name = "closebutton"> Close</string>
+    <string name = "logoimg"> logo</string>
+    <string name = "wellcome"> Wellcome</string>
+    <string name = "filter"> Filters</string>
+    <string name = "or"> or</string>
+    <string name = "noacount"> Don´t have a account? </string>
+    <string name = "signup"> Sign Up </string>
+    <string name = "loginneed"> Sign in to continue </string>
+    <string name = "youremail"> youremail@email.com </string>
+    <string name = "forgotpass"> Forgot Password? </string>
+    <string name = "entertag"> Email or User </string>
+    <string name = "typepass"> Type your Password? </string>
+
+
+
+
+
 </resources>

@@ -71,25 +71,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnNewPatient"
 
-        app:boxBackgroundMode="filled"
+        android:hint="@string/label_search"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="#E0E0E0"
+        app:boxStrokeWidth="0.8dp"
+        app:boxCornerRadiusTopStart="8dp"
+        app:boxCornerRadiusTopEnd="8dp"
+        app:boxCornerRadiusBottomStart="8dp"
+        app:boxCornerRadiusBottomEnd="8dp"
         app:boxBackgroundColor="@color/basicWhite"
 
-        app:boxCornerRadiusTopStart="16dp"
-        app:boxCornerRadiusTopEnd="16dp"
-        app:boxCornerRadiusBottomStart="16dp"
-        app:boxCornerRadiusBottomEnd="16dp"
-        android:hint="@string/label_search"
-        app:boxStrokeWidth="0dp"
-        app:boxStrokeWidthFocused="0dp">
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editSearch"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@drawable/searchbar"
+            android:background="@null"
             android:padding="12dp"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
+
 
 
 
@@ -112,13 +114,14 @@
         <ImageView
             android:layout_width="18dp"
             android:layout_height="18dp"
-            android:src="@drawable/filter_icon" />
+            android:src="@drawable/filter_icon"
+            android:contentDescription="@string/logoimg"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:text="Filtros"
+            android:text="@string/filter"
             android:textStyle="bold"
             android:textColor="@color/textPrimary"
             android:textSize="14sp" />
