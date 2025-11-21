@@ -1,48 +1,68 @@
 package com.example.feasy
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import android.content.Intent
+import com.example.feasy.databinding.ActivityLoginBinding
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.cancel
+import io.github.jan.supabase.auth.auth
+import io.github.jan.supabase.auth.providers.builtin.Email
 
+// IMPORTANTE: Se sua SignupActivity estiver na pasta 'ui', precisa desse import:
+import com.example.feasy.ui.SignupActivity
+// Se a linha acima ficar vermelha, apague ela e importe 'SignupActivity' manualmente (Alt+Enter).
 
 class LoginActivity : AppCompatActivity() {
 
-    private val emailCorreto = "teste@email.com"
-    private val senhaCorreta = "123456"
+    private lateinit var binding: ActivityLoginBinding
+    private val scope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val emailInput = findViewById<EditText>(R.id.email_input)
-        val passwordInput = findViewById<EditText>(R.id.password_input)
-        val btnEntrar = findViewById<Button>(R.id.btnEntrar)
+        // --- Lógica do Botão ENTRAR ---
+        binding.btnEntrar.setOnClickListener {
+            val email = binding.emailInput.text.toString().trim()
+            val password = binding.passwordInput.text.toString().trim()
 
-        btnEntrar.setOnClickListener {
-            val email = emailInput.text.toString().trim()
-            val senha = passwordInput.text.toString().trim()
-
-            if (email.isEmpty() || senha.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
-                Log.d("LOGIN", "Erro: campos vazios!")
                 return@setOnClickListener
             }
+            scope.launch {
+                try {
+                    SupabaseClientProvider.client.auth.signInWith(Email) {
+                        this.email = email
+                        this.password = password
+                    }
 
-            if (email == emailCorreto && senha == senhaCorreta) {
-                Toast.makeText(this, "Login realizado!", Toast.LENGTH_SHORT).show()
-                Log.d("LOGIN", "Login efetuado com sucesso!")
+                    Toast.makeText(this@LoginActivity, "Login realizado!", Toast.LENGTH_SHORT).show()
 
-                val intent = Intent(this, PacientsActivity::class.java)
-                startActivity(intent)
-                finish() // para impedir que o usuário volte ao login
-            } else {
-                Toast.makeText(this, "Email ou senha incorretos", Toast.LENGTH_SHORT).show()
-                Log.d("LOGIN", "Login inválido: email ou senha incorretos.")
+                    startActivity(Intent(this@LoginActivity, PacientsActivity::class.java))
+                    finish()
+
+                } catch (e: Exception) {
+                    Toast.makeText(this@LoginActivity, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
+                }
             }
         }
+
+        // --- Lógica do Botão CADASTRAR (Agora no lugar certo!) ---
+        // Certifique-se que no seu XML o ID é @+id/signupLink
+        binding.signupLink.setOnClickListener {
+            val intent = Intent(this, SignupActivity::class.java)
+            startActivity(intent)
+        }
+
+    } // <--- O onCreate fecha AQUI
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel() // Evita travar o app se sair da tela durante o login
     }
-}
+} // <--- A classe fecha AQUI

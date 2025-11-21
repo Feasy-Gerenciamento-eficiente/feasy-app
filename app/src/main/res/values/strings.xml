@@ -33,7 +33,14 @@
     <string name = "youremail"> youremail@email.com </string>
     <string name = "forgotpass"> Forgot Password? </string>
     <string name = "entertag"> Email or User </string>
-    <string name = "typepass"> Type your Password? </string>
+    <string name = "typepass"> Type your password </string>
+    <string name = "name">Name </string>
+    <string name = "nameexample">Ex: Anna Letícia Letícia </string>
+    <string name = "haveacount"> Have a account? </string>
+    <string name = "crefitocode"> Ex: CREFITO-15/12345-F </string>
+    <string name = "crefito"> Crefito Id  </string>
+
+
 
 
 
