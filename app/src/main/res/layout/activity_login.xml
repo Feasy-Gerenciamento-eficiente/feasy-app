@@ -167,9 +167,10 @@
                 android:id="@+id/line_right"
                 android:layout_width="142dp"
                 android:layout_height="1dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="37dp"
                 android:background="#B2DFDB"
+                app:layout_constraintStart_toEndOf="@id/ortxt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnEntrar" />
 
