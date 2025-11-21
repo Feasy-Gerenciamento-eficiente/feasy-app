@@ -46,6 +46,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
             android:text="João Silva"
+            android:layout_marginLeft="8dp"
 
             android:textColor="@color/figma_foreground"
             android:textSize="18sp"

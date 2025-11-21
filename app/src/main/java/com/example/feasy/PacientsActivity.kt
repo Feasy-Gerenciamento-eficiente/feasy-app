@@ -2,18 +2,11 @@ package com.example.feasy
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView // <--- NOVO
-import androidx.recyclerview.widget.ItemTouchHelper // <--- NOVO
-import android.graphics.Canvas // <--- NOVO
-import android.graphics.Paint // <--- NOVO
-import android.graphics.Color // <--- NOVO
 import com.example.feasy.databinding.ActivityPacientsBinding
 import com.example.feasy.ui.AddPacienteActivity
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.feasy.ui.PacientesAdapter
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Columns
@@ -21,6 +14,13 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.cancel
 import io.github.jan.supabase.auth.auth
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Color
 
 class PacientsActivity : AppCompatActivity() {
 
@@ -40,9 +40,16 @@ class PacientsActivity : AppCompatActivity() {
 
         binding.recyclerViewPacientes.layoutManager = LinearLayoutManager(this)
 
-        // Inicializa o adapter vazio
+        // Inicializa o adapter vazio para não dar erro antes de carregar
         adapter = PacientesAdapter(emptyList())
         binding.recyclerViewPacientes.adapter = adapter
+
+        // --- CONFIGURAÇÃO DO BOTÃO SAIR (LOGOUT) ---
+        // ADICIONEI ISTO AQUI:
+        binding.btnLogout.setOnClickListener {
+            realizarLogout()
+        }
+        // -------------------------------------------
 
         // --- AQUI COMEÇA O CÓDIGO DO SWIPE (DESLIZAR PARA APAGAR) ---
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -83,7 +90,7 @@ class PacientsActivity : AppCompatActivity() {
                     )
 
                     // Ícone da Lixeira
-                    val icon = androidx.core.content.ContextCompat.getDrawable(this@PacientsActivity, R.drawable.deleteicon)
+                    val icon = androidx.core.content.ContextCompat.getDrawable(this@PacientsActivity, R.drawable.deleteicon) // Confirme se o nome é deleteicon mesmo
                     if (icon != null) {
                         val margin = (itemView.height - icon.intrinsicHeight) / 2
                         val top = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
@@ -143,16 +150,18 @@ class PacientsActivity : AppCompatActivity() {
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(this@PacientsActivity, "Erro: ${e.message}", Toast.LENGTH_SHORT).show()
+                // Toast.makeText(this@PacientsActivity, "Erro: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun configurarBarraDePesquisa() {
+        // Adiciona um "olheiro" no campo de texto
         binding.editSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
+            // Esse é o que importa: Quando o texto muda
             override fun afterTextChanged(s: Editable?) {
                 filtrarLista(s.toString())
             }
@@ -161,13 +170,21 @@ class PacientsActivity : AppCompatActivity() {
 
     private fun filtrarLista(textoDigitado: String) {
         if (textoDigitado.isEmpty()) {
+            // Se a busca está vazia, mostra a lista original
             adapter.atualizarLista(listaOriginal)
+
+            // CORREÇÃO: Volta a mostrar o total original
             atualizarContador(listaOriginal.size)
         } else {
+            // Se tem texto, cria a lista filtrada
             val listaFiltrada = listaOriginal.filter { paciente ->
                 paciente.usuarios.nome.contains(textoDigitado, ignoreCase = true)
             }
+
+            // Atualiza o Adapter com os filtrados
             adapter.atualizarLista(listaFiltrada)
+
+            // CORREÇÃO: Atualiza o contador com o tamanho da lista FILTRADA
             atualizarContador(listaFiltrada.size)
         }
     }
@@ -189,6 +206,27 @@ class PacientsActivity : AppCompatActivity() {
                 Toast.makeText(this@PacientsActivity, "Erro ao deletar: ${e.message}", Toast.LENGTH_LONG).show()
                 // Se der erro, recarrega a lista para o item voltar
                 carregarPacientes()
+            }
+        }
+    }
+
+    // --- FUNÇÃO DE SAIR ---
+    private fun realizarLogout() {
+        scope.launch {
+            try {
+                // 1. Avisa o Supabase para encerrar a sessão
+                SupabaseClientProvider.client.auth.signOut()
+
+                // 2. Volta para a tela de Login e limpa o histórico
+                val intent = Intent(this@PacientsActivity, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+
+                finish() // Garante que essa tela morra
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this@PacientsActivity, "Erro ao sair: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }

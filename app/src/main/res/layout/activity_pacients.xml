@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_pacients"
-    android:layout_marginBottom="72dp">
+    android:layout_marginBottom="2dp">
 
     <!--
         CORREÇÃO 1: Adicionei constraints verticais ao botão
@@ -121,19 +121,34 @@
             android:textSize="14sp" />
     </LinearLayout>
 
-     <androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewPacientes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-         android:layout_marginBottom="12dp"
+        android:layout_marginBottom="98dp"
         android:clipToPadding="false"
         android:paddingBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnFilters"
+        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/item_patient_card" />
+
+    <ImageButton
+        android:id="@+id/btnLogout"
+        android:layout_width="41dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/searchbar"
+        android:contentDescription="Sair"
+        android:src="@drawable/logouticon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewPacientes"
+        app:tint="#FF5252" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
