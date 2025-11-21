@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("plugin.serialization") version "2.0.21"
 }
 
 android {
@@ -64,4 +65,17 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // ----------------------------
+    // SUPABASE (correto!)
+    // ----------------------------
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.0.2"))
+
+    implementation("io.github.jan-tennert.supabase:auth-kt")
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+
+    // Ktor Client obrigatório
+    implementation("io.ktor:ktor-client-android:3.0.1")
+    // Opcional mas recomendado para evitar erros de serialização no Ktor 3
+    implementation("io.ktor:ktor-client-core:3.0.1")
 }
