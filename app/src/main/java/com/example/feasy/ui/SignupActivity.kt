@@ -12,6 +12,9 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.Email
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
+import io.github.jan.supabase.postgrest.from
+import com.example.feasy.UsuarioDto
+import com.example.feasy.FisioterapeutaDto
 
 class SignupActivity : AppCompatActivity() {
 
@@ -61,23 +64,41 @@ class SignupActivity : AppCompatActivity() {
             // Chamada ao Supabase
             scope.launch {
                 try {
+                    // 1. Cria o Login no Auth
                     SupabaseClientProvider.client.auth.signUpWith(Email) {
                         this.email = email
                         this.password = password
-
-                        // Enviando Nome e Crefito como metadados
-                        data = buildJsonObject {
-                            put("full_name", name)
-                            put("crefito", crefito)
-                            put("role", "fisio")
-                        }
                     }
 
-                    Toast.makeText(this@SignupActivity, "Cadastro realizado com sucesso!", Toast.LENGTH_LONG).show()
+                    // 2. Recupera o ID que o Supabase acabou de gerar
+                    val user = SupabaseClientProvider.client.auth.currentUserOrNull()
+                    val userId = user?.id ?: throw Exception("Erro ao recuperar ID do usuário")
+
+                    // 3. Salva na tabela 'usuarios'
+                    // OBS: Coloquei uma data fictícia pois sua tela não tem campo de data
+                    val novoUsuario = UsuarioDto(
+                        id = userId,
+                        nome = name,
+                        email = email,
+                        dataNascimento = "2000-01-01",
+                        tipoUsuario = "fisioterapeuta"
+                    )
+                    SupabaseClientProvider.client.from("usuarios").insert(novoUsuario)
+
+                    // 4. Salva na tabela 'fisioterapeutas' vinculando o ID
+                    val novoFisio = FisioterapeutaDto(
+                        usuarioId = userId,
+                        crefito = crefito
+                    )
+                    SupabaseClientProvider.client.from("fisioterapeutas").insert(novoFisio)
+
+                    // Sucesso
+                    Toast.makeText(this@SignupActivity, "Conta criada com sucesso!", Toast.LENGTH_LONG).show()
                     finish()
 
                 } catch (e: Exception) {
-                    Toast.makeText(this@SignupActivity, "Erro ao cadastrar: ${e.message}", Toast.LENGTH_LONG).show()
+                    e.printStackTrace()
+                    Toast.makeText(this@SignupActivity, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }

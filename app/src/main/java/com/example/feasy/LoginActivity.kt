@@ -22,6 +22,19 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // --- CÓDIGO NOVO: VERIFICAÇÃO DE LOGIN AUTOMÁTICO ---
+        // Pergunta pro Supabase: "Tem alguém logado?"
+        val usuarioAtual = SupabaseClientProvider.client.auth.currentUserOrNull()
+
+        if (usuarioAtual != null) {
+            // Se SIM, vai direto para a tela de Pacientes
+            startActivity(Intent(this, PacientsActivity::class.java))
+            finish() // Fecha o Login para não poder voltar
+            return   // Para o código aqui, nem carrega o resto da tela
+        }
+        // ----------------------------------------------------
+
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -52,8 +65,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        // --- Lógica do Botão CADASTRAR (Agora no lugar certo!) ---
-        // Certifique-se que no seu XML o ID é @+id/signupLink
+        // --- Lógica do Botão CADASTRAR ---
         binding.signupLink.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
@@ -63,6 +75,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        scope.cancel() // Evita travar o app se sair da tela durante o login
+        scope.cancel()
     }
-} // <--- A classe fecha AQUI
+}

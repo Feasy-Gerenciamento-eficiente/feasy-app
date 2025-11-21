@@ -24,3 +24,20 @@ data class PacienteDto(
     @SerialName("diagnostico_inicial") val diagnosticoInicial: String,
     @SerialName("acompanhante_emergencia") val acompanhante: String // Ajustei o nome baseado na imagem
 )
+
+@Serializable
+data class FisioterapeutaDto(
+    @SerialName("usuario_id") val usuarioId: String, // Chave Estrangeira (PK)
+    val crefito: String
+    // Se tiver especialidade, adiciona aqui
+)
+
+@Serializable
+data class PacienteComUsuario(
+    // Dados diretos da tabela 'pacientes'
+    @SerialName("usuario_id") val usuarioId: String,
+    @SerialName("diagnostico_inicial") val diagnostico: String,
+
+    // O Supabase vai injetar os dados da tabela 'usuarios' aqui dentro
+    val usuarios: UsuarioDto
+)
