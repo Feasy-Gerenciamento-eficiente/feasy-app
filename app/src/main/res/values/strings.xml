@@ -20,6 +20,7 @@
     <string name="label_cancel">Cancel </string>
     <string name="example_name">Ex: Maria Silva </string>
     <string name="example_birth">"Ex: 11/03/2009 "</string>
+    <string name="example_birth">"Ex: Maria Silva "</string>
     <string name="diagnosis_example">Ex: Autism Level 2, injurie</string>
     <string name = "filldatapacients">"Fill with new pacient data "</string>
     <string name = "closebutton"> Close</string>
@@ -42,6 +43,7 @@
     <string name = "nameresp">Responsable Name </string>
     <string name = "respex">Ex: João de Souza </string>
 
+    <string name = "typepass"> Type your Password? </string>
 
 
 

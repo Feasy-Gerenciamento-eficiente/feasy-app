@@ -9,11 +9,6 @@
     android:background="@color/background_pacients"
     android:layout_marginBottom="2dp">
 
-    <!--
-        CORREÇÃO 1: Adicionei constraints verticais ao botão
-        para ele não pular para o topo. A margem de 51dp
-        foi baseada no seu "tools:layout_editor_absoluteY"
-    -->
     <Button
         android:id="@+id/btnNewPatient"
         android:layout_width="160dp"
@@ -84,6 +79,7 @@
             android:inputType="text"
             android:textColor="@color/textPrimary"
             android:imeOptions="actionDone"/>
+            android:textColor="@color/textPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
