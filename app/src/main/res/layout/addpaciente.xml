@@ -1,340 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:fillViewport="true">
-    android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    app:cardCornerRadius="16dp"
-    android:layout_marginTop="40dp"
-    android:background="@drawable/searchbar">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp">
-        android:padding="24dp"
-        >
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/searchbar"
+        app:cardCornerRadius="16dp">
 
-        <TextView
-            android:id="@+id/text_view_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Adicionar Paciente"
-            android:textColor="#000000"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginTop="40dp"
-            android:text="@string/label_addpacients"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_view_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Preencha os dados abaixo"
-            android:layout_marginTop="4dp"
-            android:textColor="#757575"
-            android:textSize="14sp"
-            android:text="@string/filldatapacients"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp"
-            android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@id/text_view_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <ImageButton
-            android:id="@+id/button_close"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="30dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/close_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="#000000"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/label_nome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nome do Paciente"
-            android:layout_marginTop="24dp"
-            android:textStyle="bold"
-            android:textColor="#4DB6AC"
-            android:text="@string/label_namepacients"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/cardview_dark_background"
-            app:layout_constraintTop_toBottomOf="@id/text_view_subtitle"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/edit_text_nome"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/searchbar"
-            android:hint="Ex: Maria Silva"
-            android:inputType="textPersonName|textCapWords"
-            android:paddingHorizontal="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_nome" />
-
-        <TextView
-            android:id="@+id/label_nomeresp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nome do Responsável"
-            android:layout_marginTop="16dp"
-            android:textStyle="bold"
-            android:textColor="#4DB6AC"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_nome"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/edit_text_nomeresptext"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/searchbar"
-            android:hint="Ex: João da Silva"
-            android:inputType="textPersonName|textCapWords"
-            android:paddingHorizontal="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_nomeresp" />
-
-        <TextView
-            android:id="@+id/email_txttadd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Email"
-            android:textStyle="bold"
-            android:textColor="#4DB6AC"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_nomeresptext" />
-
-        <EditText
-            android:id="@+id/email_inputtlab"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/searchbar"
-            android:hint="email@exemplo.com"
-            android:inputType="textEmailAddress"
-            android:paddingHorizontal="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/email_txttadd" />
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:autofillHints="username"
-            android:background="@drawable/searchbar"
-            android:hint="@string/example_name"
-            android:inputType="textPersonName|textCapWords"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_nome" />
-
-        <TextView
-            android:id="@+id/label_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Data de Nascimento"
-            android:textStyle="bold"
-            android:textColor="#4DB6AC"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/email_inputtlab"
-            android:text="@string/label_birthpacients"
-            android:textColor="@color/cardview_dark_background"
-            android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_nome"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/edit_text_data_nascimento"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:hint="DD/MM/AAAA"
-            android:inputType="date"
-            android:background="@drawable/searchbar"
-            android:paddingHorizontal="16dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/example_birth"
-            android:inputType="date"
-            android:autofillHints="username"
-            android:background="@drawable/searchbar"
-            android:padding="12dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/label_data"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <TextView
-            android:id="@+id/label_diagnostico"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Diagnóstico Inicial"
-            android:textStyle="bold"
-            android:textColor="#4DB6AC"
-            android:layout_marginTop="16dp"
-            android:text="@string/label_diagnosis"
-            android:textColor="@color/cardview_dark_background"
-            android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_data_nascimento"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <EditText
-            android:id="@+id/edit_text_diagnostico"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:minHeight="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/searchbar"
-            android:hint="Ex: TEA Nível 1"
-            android:inputType="textMultiLine"
-            android:padding="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_diagnostico" />
-
-        <Button
-            android:id="@+id/btnAddNewPatient"
-            android:layout_width="0dp"
-            android:layout_height="55dp"
-            android:background="@drawable/patientlistgradient"
-            android:text="SALVAR PACIENTE"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/searchbar"
-            android:hint="@string/diagnosis_example"
-            android:inputType="textMultiLine"
-            android:padding="12dp"
-            android:autofillHints="username"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_diagnostico" />
-
-        <TextView
-            android:id="@+id/label_cor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_profileconfig"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/cardview_dark_background"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_diagnostico"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chip_group_color"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="4dp"
-            app:chipSpacingHorizontal="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/label_cor"
-            app:singleSelection="true">
+            android:layout_height="wrap_content"
+            android:padding="24dp">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_color_pink"
-                android:layout_width="54dp"
+            <TextView
+                android:id="@+id/text_view_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="@string/label_addpacients"
+                android:textColor="@color/cardview_dark_background"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Adicionar Paciente" />
+
+            <TextView
+                android:id="@+id/text_view_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/filldatapacients"
+                android:textColor="#757575"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_title"
+                tools:text="Preencha os dados abaixo" />
+
+            <ImageButton
+                android:id="@+id/button_close"
+                android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:checkable="true"
-                app:checkedIconVisible="false"
-                app:chipBackgroundColor="@color/secondary_text"
-                app:chipCornerRadius="80dp"
-                app:chipIconVisible="false"
-                app:chipStrokeColor="@color/cardview_dark_background" />
+                android:layout_marginTop="30dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/close_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#000000"
+                tools:ignore="ContentDescription" />
 
+            <!-- Nome do Paciente -->
+            <TextView
+                android:id="@+id/label_nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_namepacients"
+                android:textColor="@color/cardview_dark_background"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_view_subtitle"
+                tools:text="Nome do Paciente" />
 
+            <EditText
+                android:id="@+id/edit_text_nome"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/searchbar"
+                android:hint="@string/example_name"
+                android:inputType="textPersonName|textCapWords"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_nome" />
 
-        </com.google.android.material.chip.ChipGroup>
+            <!-- Nome do Responsável -->
+            <TextView
+                android:id="@+id/label_nomeresp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Nome do Responsável"
+                android:textColor="#4DB6AC"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_text_nome" />
 
-        <Button
-            android:id="@+id/btnNewPatient"
-            android:layout_width="120dp"
-            android:layout_height="36dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/patientlistgradient"
-            android:text="@string/label_newpacients"
-            android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:backgroundTint="@null"
-            android:layout_marginTop="32dp"
-            app:layout_constraintTop_toBottomOf="@id/edit_text_diagnostico"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            <EditText
+                android:id="@+id/edit_text_nomeresptext"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/searchbar"
+                android:hint="Ex: João da Silva"
+                android:inputType="textPersonName|textCapWords"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_nomeresp" />
 
-        <Button
-            android:id="@+id/button_cancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:background="@android:color/transparent"
-            android:text="Cancelar"
-            android:textAllCaps="false"
-            android:textColor="#757575"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddNewPatient"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            <!-- Email -->
+            <TextView
+                android:id="@+id/email_txttadd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Email"
+                android:textColor="#4DB6AC"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_text_nomeresptext" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/email_inputtlab"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/searchbar"
+                android:hint="email@exemplo.com"
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email_txttadd" />
+
+            <!-- Data Nascimento -->
+            <TextView
+                android:id="@+id/label_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/label_birthpacients"
+                android:textColor="@color/cardview_dark_background"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email_inputtlab"
+                tools:text="Data de Nascimento" />
+
+            <EditText
+                android:id="@+id/edit_text_data_nascimento"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:autofillHints="username"
+                android:background="@drawable/searchbar"
+                android:hint="@string/example_birth"
+                android:inputType="date"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_data" />
+
+            <!-- Diagnóstico -->
+            <TextView
+                android:id="@+id/label_diagnostico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/label_diagnosis"
+                android:textColor="@color/cardview_dark_background"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_text_data_nascimento"
+                tools:text="Diagnóstico Inicial" />
+
+            <EditText
+                android:id="@+id/edit_text_diagnostico"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/searchbar"
+                android:hint="@string/diagnosis_example"
+                android:inputType="textMultiLine"
+                android:minHeight="50dp"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_diagnostico" />
+
+            <TextView
+                android:id="@+id/label_cor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_profileconfig"
+                android:textColor="@color/cardview_dark_background"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_text_diagnostico" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:chipSpacingHorizontal="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/label_cor"
+                app:singleSelection="true" />
+
+            <Button
+                android:id="@+id/btnAddNewPatient"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/patientlistgradient"
+                android:text="SALVAR PACIENTE"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chip_group_color" />
+
+            <!-- Button Cancelar Implemented Here -->
+            <Button
+                android:id="@+id/buttonCancelar"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
+                android:text="CANCELAR"
+                android:textColor="#757575"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnAddNewPatient" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </ScrollView>
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chip_group_color" />
-
-        <Button
-            android:id="@+id/button_cancelar"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:background="@drawable/searchbar"
-
-
-
-            android:text="@string/label_cancel"
-            android:textColor="@color/cardview_dark_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnNewPatient"
-            app:layout_constraintHorizontal_bias="1.0"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageButton
-            android:id="@+id/button_close"
-            android:layout_width="36dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="-10dp"
-            android:layout_marginTop="-15dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/close_icon"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteY="3dp"
-            android:contentDescription="@string/closebutton"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</com.google.android.material.card.MaterialCardView>

@@ -1,80 +1,65 @@
-package com.example.feasy
+package com.example.feasy.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.feasy.MainActivity
 import com.example.feasy.databinding.ActivityLoginBinding
-import kotlinx.coroutines.MainScope
+import com.example.feasy.network.SupabaseClient
+import io.github.jan.supabase.gotrue.auth
+import io.github.jan.supabase.gotrue.providers.builtin.Email
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.cancel
-import io.github.jan.supabase.auth.auth
-import io.github.jan.supabase.auth.providers.builtin.Email
-
-// IMPORTANTE: Se sua SignupActivity estiver na pasta 'ui', precisa desse import:
-import com.example.feasy.ui.SignupActivity
-// Se a linha acima ficar vermelha, apague ela e importe 'SignupActivity' manualmente (Alt+Enter).
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private val scope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // --- CÓDIGO NOVO: VERIFICAÇÃO DE LOGIN AUTOMÁTICO ---
-        // Pergunta pro Supabase: "Tem alguém logado?"
-        val usuarioAtual = SupabaseClientProvider.client.auth.currentUserOrNull()
-
-        if (usuarioAtual != null) {
-            // Se SIM, vai direto para a tela de Pacientes
-            startActivity(Intent(this, PacientsActivity::class.java))
-            finish() // Fecha o Login para não poder voltar
-            return   // Para o código aqui, nem carrega o resto da tela
-        }
-        // ----------------------------------------------------
-
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // --- Lógica do Botão ENTRAR ---
+        // --- CORREÇÃO: Usando os IDs corretos do seu XML ---
+        // XML: @+id/btnEntrar -> Kotlin: binding.btnEntrar
         binding.btnEntrar.setOnClickListener {
-            val email = binding.emailInput.text.toString().trim()
-            val password = binding.passwordInput.text.toString().trim()
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
+            // XML: @+id/email_input -> Kotlin: binding.emailInput
+            val email = binding.emailInput.text.toString()
+
+            // XML: @+id/password_input -> Kotlin: binding.passwordInput
+            val senha = binding.passwordInput.text.toString()
+
+            if (email.isBlank() || senha.isBlank()) {
+                Toast.makeText(this, "Preencha email e senha", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            scope.launch {
+
+            lifecycleScope.launch {
                 try {
-                    SupabaseClientProvider.client.auth.signInWith(Email) {
+                    SupabaseClient.client.auth.signInWith(Email) {
                         this.email = email
-                        this.password = password
+                        this.password = senha
                     }
-
-                    Toast.makeText(this@LoginActivity, "Login realizado!", Toast.LENGTH_SHORT).show()
-
-                    startActivity(Intent(this@LoginActivity, PacientsActivity::class.java))
+                    Toast.makeText(applicationContext, "Login realizado!", Toast.LENGTH_LONG).show()
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
                     finish()
 
                 } catch (e: Exception) {
-                    Toast.makeText(this@LoginActivity, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
+                    e.printStackTrace()
+                    Toast.makeText(applicationContext, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
 
-        // --- Lógica do Botão CADASTRAR ---
-        binding.signupLink.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
+        // --- CORREÇÃO: Botão de Cadastrar ---
+        // XML: @+id/btnIrParaCadastro -> Kotlin: binding.btnIrParaCadastro
+        binding.btnIrParaCadastro.setOnClickListener {
+            val intent = Intent(this, CadastroActivity::class.java)
             startActivity(intent)
         }
-
-    } // <--- O onCreate fecha AQUI
-
-    override fun onDestroy() {
-        super.onDestroy()
-        scope.cancel()
     }
 }

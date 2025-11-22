@@ -21,7 +21,7 @@
             android:id="@+id/viewAvatarBackground"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="@drawable/avatar_background"
+            android:background="@drawable/avatar_background_2"
             android:backgroundTint="#AED9E0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
