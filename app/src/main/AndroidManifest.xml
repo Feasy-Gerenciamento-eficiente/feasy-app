@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
-        android:name=".FeasyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -11,35 +12,33 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Feasy">
+        android:theme="@style/Theme.Feasy"
+        tools:targetApi="31">
 
+        <!-- CADASTRO ACTIVITY (Apenas registrada) -->
         <activity
-            android:name=".ui.SignupActivity" />
+            android:name=".ui.CadastroActivity"
+            android:exported="false"
+            android:label="Criar Conta" />
 
-
-        <!-- Tela de Pacientes -->
+        <!-- LOGIN ACTIVITY (Agora é a Launcher/Principal) -->
         <activity
-            android:name=".PacientsActivity"
-            android:exported="false" />
-
-        <activity android:name=".ui.AddPacienteActivity" />
-
-        <!-- Tela inicial → Login -->
-        <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.Feasy">
-
-
-
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
+        <!-- MAIN ACTIVITY (Tela Home - Só abre depois do login) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Feasy" />
 
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

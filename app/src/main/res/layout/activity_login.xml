@@ -69,7 +69,6 @@
                 android:id="@+id/email_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/prompt_email"
                 android:text="@string/entertag"
                 android:textColor="@color/green_txt"
                 android:textSize="15sp"
@@ -100,7 +99,6 @@
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/emailInput" />
-                app:layout_constraintTop_toBottomOf="@id/email_input" />
 
             <EditText
                 android:id="@+id/passwordInput"
@@ -125,14 +123,12 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/passwordInput" />
-                app:layout_constraintTop_toBottomOf="@id/password_input" />
 
             <Button
                 android:id="@+id/btnEntrar"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/patientlistgradient"
                 android:background="@drawable/btn_login_selector"
                 android:elevation="4dp"
                 android:text="@string/action_sign_in_short"
@@ -152,24 +148,11 @@
                 android:background="#B2DFDB"
                 app:layout_constraintEnd_toStartOf="@+id/ortxt"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/forgot_password_txt" />
-
-            <View
-                android:id="@+id/line_left"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="37dp"
-                android:layout_marginEnd="8dp"
-                android:background="#B2DFDB"
-                app:layout_constraintEnd_toStartOf="@+id/or"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnEntrar" />
 
 
             <TextView
                 android:id="@+id/ortxt"
-                android:id="@+id/or"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
@@ -184,16 +167,11 @@
                 android:id="@+id/line_right"
                 android:layout_width="142dp"
                 android:layout_height="1dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="37dp"
-                android:background="#B2DFDB"
-                app:layout_constraintStart_toEndOf="@id/ortxt"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="37dp"
                 android:background="#B2DFDB"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="parent/"
+                app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btnEntrar" />
 
             <TextView
@@ -205,19 +183,13 @@
                 android:textColor="@color/green_txt"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/signupLink"
                 app:layout_constraintTop_toBottomOf="@id/ortxt"
-                app:layout_constraintEnd_toStartOf="@id/signup"
-                app:layout_constraintTop_toBottomOf="@id/or"
+                app:layout_constraintEnd_toStartOf="@id/signupLink"
                 app:layout_constraintHorizontal_chainStyle="packed"
-
-
-
                 />
 
             <TextView
                 android:id="@+id/signupLink"
-                android:id="@+id/signup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -227,10 +199,7 @@
                 app:layout_constraintStart_toEndOf="@id/noacount"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/ortxt"
-                app:layout_constraintTop_toBottomOf="@id/or"
                 android:layout_marginHorizontal="4dp"
-
-
                 />
 
 
