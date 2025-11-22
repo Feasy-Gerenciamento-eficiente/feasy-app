@@ -3,12 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".PacientsActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_pacients"
-    android:layout_marginBottom="2dp">
+    android:background="@color/background_pacients">
 
+    <!--
+        CORREÇÃO 1: Adicionei constraints verticais ao botão
+        para ele não pular para o topo. A margem de 51dp
+        foi baseada no seu "tools:layout_editor_absoluteY"
+    -->
     <Button
         android:id="@+id/btnNewPatient"
         android:layout_width="160dp"
@@ -44,14 +47,25 @@
         app:layout_constraintTop_toTopOf="@+id/btnNewPatient"
         app:layout_constraintVertical_bias="0.583" />
 
-
+    <TextView
+        android:id="@+id/textcount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        android:text="(2)"
+        android:textColor="@color/figma_muted_foreground"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        app:layout_constraintStart_toEndOf="@id/textTitle"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,10 +89,6 @@
             android:layout_height="48dp"
             android:background="@null"
             android:padding="12dp"
-            android:maxLines="1"
-            android:inputType="text"
-            android:textColor="@color/textPrimary"
-            android:imeOptions="actionDone"/>
             android:textColor="@color/textPrimary" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -122,29 +132,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="98dp"
         android:clipToPadding="false"
-        android:paddingBottom="32dp"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnFilters"
-        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/item_patient_card" />
-
-    <ImageButton
-        android:id="@+id/btnLogout"
-        android:layout_width="41dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/searchbar"
-        android:contentDescription="Sair"
-        android:src="@drawable/logouticon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerViewPacientes"
-        app:tint="#FF5252" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

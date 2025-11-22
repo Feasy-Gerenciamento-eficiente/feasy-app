@@ -35,9 +35,4 @@
     <string name="forgotpass">Esqueceu sua senha?</string>
     <string name="entertag">Email ou Nome de usuário</string>
     <string name="typepass">Digite sua senha</string>
-    <string name="name">"Nome "</string>
-    <string name="nameexample">"Ex: Anna Letícia Letícia "</string>
-    <string name="haveacount">Já tem uma conta?</string>
-    <string name="crefitocode">" Ex: CREFITO-15/12345-F "</string>
-    <string name="crefito">" Crefito Id  "</string>
 </resources>
