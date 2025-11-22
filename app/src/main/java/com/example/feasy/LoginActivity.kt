@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.feasy.MainActivity
 import com.example.feasy.databinding.ActivityLoginBinding
 import com.example.feasy.network.SupabaseClient
+import com.example.feasy.ui.CadastroActivity
 import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.gotrue.providers.builtin.Email
 import kotlinx.coroutines.launch
@@ -51,6 +52,11 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Erro: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
+        }
+
+        binding.btnCadastro.setOnClickListener {
+            val intent = Intent(this, CadastroActivity::class.java)
+            startActivity(intent)
         }
     }
 }
