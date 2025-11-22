@@ -19,6 +19,7 @@
     <string name="label_profileconfig">Profile photo edit </string>
     <string name="label_cancel">Cancel </string>
     <string name="example_name">Ex: Maria Silva </string>
+    <string name="example_birth">"Ex: 11/03/2009 "</string>
     <string name="example_birth">"Ex: Maria Silva "</string>
     <string name="diagnosis_example">Ex: Autism Level 2, injurie</string>
     <string name = "filldatapacients">"Fill with new pacient data "</string>
@@ -33,6 +34,15 @@
     <string name = "youremail"> youremail@email.com </string>
     <string name = "forgotpass"> Forgot Password? </string>
     <string name = "entertag"> Email or User </string>
+    <string name = "typepass"> Type your password </string>
+    <string name = "name">Name </string>
+    <string name = "nameexample">Ex: Anna Letícia Letícia </string>
+    <string name = "haveacount"> Have a account? </string>
+    <string name = "crefitocode"> Ex: CREFITO-15/12345-F </string>
+    <string name = "crefito"> Crefito Id  </string>
+    <string name = "nameresp">Responsable Name </string>
+    <string name = "respex">Ex: João de Souza </string>
+
     <string name = "typepass"> Type your Password? </string>
 
 

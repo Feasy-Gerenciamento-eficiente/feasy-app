@@ -1,20 +1,238 @@
 package com.example.feasy
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.feasy.databinding.ActivityPacientsBinding
+import com.example.feasy.ui.AddPacienteActivity
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.feasy.ui.PacientesAdapter
+import io.github.jan.supabase.postgrest.from
+import io.github.jan.supabase.postgrest.query.Columns
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.cancel
+import io.github.jan.supabase.auth.auth
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ItemTouchHelper
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Color
 
 class PacientsActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityPacientsBinding
+    private val scope = MainScope()
+
+    // Variável para guardar a lista COMPLETA (Backup)
+    private var listaOriginal: List<PacienteComUsuario> = emptyList()
+
+    // Variável para o Adapter
+    private lateinit var adapter: PacientesAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_pacients)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
+        binding = ActivityPacientsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.recyclerViewPacientes.layoutManager = LinearLayoutManager(this)
+
+        // Inicializa o adapter vazio para não dar erro antes de carregar
+        adapter = PacientesAdapter(emptyList())
+        binding.recyclerViewPacientes.adapter = adapter
+
+        // --- CONFIGURAÇÃO DO BOTÃO SAIR (LOGOUT) ---
+        // ADICIONEI ISTO AQUI:
+        binding.btnLogout.setOnClickListener {
+            realizarLogout()
+        }
+        // -------------------------------------------
+
+        // --- AQUI COMEÇA O CÓDIGO DO SWIPE (DESLIZAR PARA APAGAR) ---
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                return false // Não usamos mover, só deslizar
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+
+                // Pega o paciente antes de apagar (para saber o ID)
+                val pacienteParaApagar = adapter.getItem(position)
+
+                // 1. Remove visualmente na hora
+                adapter.removerItem(position)
+
+                // Atualiza o contador visualmente (subtrai 1)
+                atualizarContador(listaOriginal.size - 1)
+
+                // 2. Chama o Supabase para apagar do banco
+                deletarPacienteNoBanco(pacienteParaApagar.usuarioId)
+            }
+
+            // Desenha o fundo vermelho e a lixeira
+            override fun onChildDraw(
+                c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+                dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
+            ) {
+                val itemView = viewHolder.itemView
+                val paint = Paint()
+
+                if (dX < 0) { // Deslizando para esquerda
+                    // Fundo Vermelho
+                    paint.color = Color.parseColor("#D32F2F")
+                    c.drawRect(
+                        itemView.right.toFloat() + dX, itemView.top.toFloat(),
+                        itemView.right.toFloat(), itemView.bottom.toFloat(), paint
+                    )
+
+                    // Ícone da Lixeira
+                    val icon = androidx.core.content.ContextCompat.getDrawable(this@PacientsActivity, R.drawable.deleteicon) // Confirme se o nome é deleteicon mesmo
+                    if (icon != null) {
+                        val margin = (itemView.height - icon.intrinsicHeight) / 2
+                        val top = itemView.top + (itemView.height - icon.intrinsicHeight) / 2
+                        val bottom = top + icon.intrinsicHeight
+                        val iconRight = itemView.right - margin
+                        val iconLeft = iconRight - icon.intrinsicWidth
+
+                        icon.setBounds(iconLeft, top, iconRight, bottom)
+                        icon.draw(c)
+                    }
+                }
+                super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            }
+        }
+        // Conecta o Swipe na Lista
+        ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(binding.recyclerViewPacientes)
+        // --- FIM DO CÓDIGO DO SWIPE ---
+
+
+        binding.btnNewPatient.setOnClickListener {
+            startActivity(Intent(this, AddPacienteActivity::class.java))
+        }
+
+        // --- CONFIGURAÇÃO DA BUSCA ---
+        configurarBarraDePesquisa()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        carregarPacientes()
+    }
+
+    // --- FUNÇÃO PARA ATUALIZAR O TEXTO ---
+    private fun atualizarContador(qtd: Int) {
+        binding.textTitle.text = "Pacientes ($qtd)"
+    }
+
+    private fun carregarPacientes() {
+        scope.launch {
+            try {
+                val user = SupabaseClientProvider.client.auth.currentUserOrNull()
+                val idFisio = user?.id ?: return@launch
+
+                val listaDoBanco = SupabaseClientProvider.client
+                    .from("pacientes")
+                    .select(columns = Columns.list("*, usuarios(*)")) {
+                        filter { eq("fisioterapeuta_id", idFisio) }
+                    }.decodeList<PacienteComUsuario>()
+
+                // 1. Salva no Backup (Original)
+                listaOriginal = listaDoBanco
+
+                // 2. Atualiza a tela com a lista completa
+                adapter.atualizarLista(listaOriginal)
+
+                atualizarContador(listaOriginal.size)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Toast.makeText(this@PacientsActivity, "Erro: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun configurarBarraDePesquisa() {
+        // Adiciona um "olheiro" no campo de texto
+        binding.editSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            // Esse é o que importa: Quando o texto muda
+            override fun afterTextChanged(s: Editable?) {
+                filtrarLista(s.toString())
+            }
+        })
+    }
+
+    private fun filtrarLista(textoDigitado: String) {
+        if (textoDigitado.isEmpty()) {
+            // Se a busca está vazia, mostra a lista original
+            adapter.atualizarLista(listaOriginal)
+
+            // CORREÇÃO: Volta a mostrar o total original
+            atualizarContador(listaOriginal.size)
+        } else {
+            // Se tem texto, cria a lista filtrada
+            val listaFiltrada = listaOriginal.filter { paciente ->
+                paciente.usuarios.nome.contains(textoDigitado, ignoreCase = true)
+            }
+
+            // Atualiza o Adapter com os filtrados
+            adapter.atualizarLista(listaFiltrada)
+
+            // CORREÇÃO: Atualiza o contador com o tamanho da lista FILTRADA
+            atualizarContador(listaFiltrada.size)
+        }
+    }
+
+    // --- FUNÇÃO NOVA PARA APAGAR NO SUPABASE ---
+    private fun deletarPacienteNoBanco(idUsuarioPaciente: String) {
+        scope.launch {
+            try {
+                SupabaseClientProvider.client
+                    .from("pacientes")
+                    .delete {
+                        filter {
+                            eq("usuario_id", idUsuarioPaciente)
+                        }
+                    }
+                Toast.makeText(this@PacientsActivity, "Paciente removido!", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this@PacientsActivity, "Erro ao deletar: ${e.message}", Toast.LENGTH_LONG).show()
+                // Se der erro, recarrega a lista para o item voltar
+                carregarPacientes()
+            }
+        }
+    }
+
+    // --- FUNÇÃO DE SAIR ---
+    private fun realizarLogout() {
+        scope.launch {
+            try {
+                // 1. Avisa o Supabase para encerrar a sessão
+                SupabaseClientProvider.client.auth.signOut()
+
+                // 2. Volta para a tela de Login e limpa o histórico
+                val intent = Intent(this@PacientsActivity, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+
+                finish() // Garante que essa tela morra
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this@PacientsActivity, "Erro ao sair: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scope.cancel()
     }
 }

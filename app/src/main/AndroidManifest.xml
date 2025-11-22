@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".FeasyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,16 +13,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Feasy">
 
+        <activity
+            android:name=".ui.SignupActivity" />
+
+
         <!-- Tela de Pacientes -->
         <activity
             android:name=".PacientsActivity"
             android:exported="false" />
+
+        <activity android:name=".ui.AddPacienteActivity" />
 
         <!-- Tela inicial → Login -->
         <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.Feasy">
+
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,5 +41,5 @@
 
 
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
