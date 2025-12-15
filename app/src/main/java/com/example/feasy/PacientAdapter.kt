@@ -10,7 +10,9 @@ import java.time.Period
 import java.time.format.DateTimeFormatter
 
 class PacientesAdapter(
-    private var lista: List<PacienteComUsuario>
+    private var lista: List<PacienteComUsuario>,
+    //ADICIONADO---
+    private val onEditarPaciente: (PacienteComUsuario) -> Unit
 ) : RecyclerView.Adapter<PacientesAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemPatientCardBinding) : RecyclerView.ViewHolder(binding.root)
@@ -70,6 +72,12 @@ class PacientesAdapter(
         holder.binding.iconEye.setOnClickListener {
             // Lógica para visualizar detalhes...
         }
+
+        // ADICIONADO ---
+        holder.binding.iconEdit.setOnClickListener {
+            onEditarPaciente(item)
+        }
+
     }
 
     override fun getItemCount(): Int = lista.size

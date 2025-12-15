@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- BOTÃO PADRÃO FEASY -->
+    <style name="FeasyButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/cardview_dark_background</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <!-- INPUT PADRÃO FEASY -->
+    <style name="FeasyTextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/cardview_dark_background</item>
+        <item name="hintTextColor">@color/cardview_dark_background</item>
+    </style>
+
+</resources>

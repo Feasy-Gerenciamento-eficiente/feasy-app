@@ -17,12 +17,26 @@ class AddPacienteActivity : AppCompatActivity() {
 
     // O nome do Binding vem do seu XML (addpaciente.xml -> AddpacienteBinding)
     private lateinit var binding: AddpacienteBinding
+
+    // ADICIONADO - Variáveis para edição de pacientes
+    private var usuarioIdEdicao: String? = null
+
     private val scope = MainScope()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = AddpacienteBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        // ADICIONADO ---  🔹 PASSO 1: verificar se veio ID para edição
+        usuarioIdEdicao = intent.getStringExtra("USUARIO_ID")
+
+        // ADICIONADO ---
+        if (usuarioIdEdicao != null) {
+            entrarModoEdicao()
+        }
+
 
         // Botão 'X' de fechar
         binding.buttonClose.setOnClickListener { finish() }
@@ -35,6 +49,16 @@ class AddPacienteActivity : AppCompatActivity() {
             salvarPaciente()
         }
     }
+
+    // ADICIONADO ---
+    private fun entrarModoEdicao() {
+        // 🔹 muda o título
+        binding.textViewTitle.text = "Editar Paciente"
+
+        // 🔹 muda o texto do botão
+        binding.btnAddNewPatient.text = "Salvar Alterações"
+    }
+
 
     private fun salvarPaciente() {
         // 1. Pegar os dados que o usuário digitou

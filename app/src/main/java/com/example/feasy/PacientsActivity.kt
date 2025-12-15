@@ -22,6 +22,8 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Color
 
+
+
 class PacientsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPacientsBinding
@@ -41,7 +43,13 @@ class PacientsActivity : AppCompatActivity() {
         binding.recyclerViewPacientes.layoutManager = LinearLayoutManager(this)
 
         // Inicializa o adapter vazio para não dar erro antes de carregar
-        adapter = PacientesAdapter(emptyList())
+
+        // ADICIONADO ---
+        adapter = PacientesAdapter(listaOriginal) { paciente ->
+            abrirEdicaoPaciente(paciente)
+        }
+
+
         binding.recyclerViewPacientes.adapter = adapter
 
         // --- CONFIGURAÇÃO DO BOTÃO SAIR (LOGOUT) ---
@@ -111,12 +119,29 @@ class PacientsActivity : AppCompatActivity() {
 
 
         binding.btnNewPatient.setOnClickListener {
-            startActivity(Intent(this, AddPacienteActivity::class.java))
+            val intent = Intent(this, AddPacienteActivity::class.java)
+            startActivity(intent)
         }
 
         // --- CONFIGURAÇÃO DA BUSCA ---
         configurarBarraDePesquisa()
     }
+
+
+    // ADICIONADO ---
+    private fun abrirEdicaoPaciente(paciente: PacienteComUsuario) {
+        val intent = Intent(this, AddPacienteActivity::class.java)
+
+        // flag de edição
+        intent.putExtra("USUARIO_ID", paciente.usuarioId)
+
+        startActivity(intent)
+    }
+
+
+
+
+
 
     override fun onResume() {
         super.onResume()
