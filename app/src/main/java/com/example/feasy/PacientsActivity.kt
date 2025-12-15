@@ -133,10 +133,27 @@ class PacientsActivity : AppCompatActivity() {
         val intent = Intent(this, AddPacienteActivity::class.java)
 
         // flag de edição
+        intent.putExtra("MODO_EDICAO", true)
+
+        // IDs
         intent.putExtra("USUARIO_ID", paciente.usuarioId)
+
+        // dados do usuário
+        intent.putExtra("NOME", paciente.usuarios.nome)
+        intent.putExtra("EMAIL", paciente.usuarios.email)
+        intent.putExtra("DATA_NASC", paciente.usuarios.dataNascimento)
+
+        // dados do paciente
+
+        //ADICIONADO --
+        intent.putExtra("RESPONSAVEL", paciente.acompanhante)
+
+
+        intent.putExtra("DIAGNOSTICO", paciente.diagnostico)
 
         startActivity(intent)
     }
+
 
 
 

@@ -37,6 +37,9 @@ data class PacienteComUsuario(
     // Dados diretos da tabela 'pacientes'
     @SerialName("usuario_id") val usuarioId: String,
     @SerialName("diagnostico_inicial") val diagnostico: String,
+    @SerialName("acompanhante_emergencia")
+    val acompanhante: String,
+
 
     // O Supabase vai injetar os dados da tabela 'usuarios' aqui dentro
     val usuarios: UsuarioDto

@@ -19,7 +19,7 @@ class AddPacienteActivity : AppCompatActivity() {
     private lateinit var binding: AddpacienteBinding
 
     // ADICIONADO - Variáveis para edição de pacientes
-    private var usuarioIdEdicao: String? = null
+    private var usuarioIdParaEdicao: String? = null
 
     private val scope = MainScope()
 
@@ -30,11 +30,11 @@ class AddPacienteActivity : AppCompatActivity() {
 
 
         // ADICIONADO ---  🔹 PASSO 1: verificar se veio ID para edição
-        usuarioIdEdicao = intent.getStringExtra("USUARIO_ID")
+        usuarioIdParaEdicao = intent.getStringExtra("USUARIO_ID")
 
         // ADICIONADO ---
-        if (usuarioIdEdicao != null) {
-            entrarModoEdicao()
+        if (usuarioIdParaEdicao != null) {
+            preencherCamposEdicao()
         }
 
 
@@ -58,6 +58,34 @@ class AddPacienteActivity : AppCompatActivity() {
         // 🔹 muda o texto do botão
         binding.btnAddNewPatient.text = "Salvar Alterações"
     }
+
+    //ADICIONADO ---
+    private fun preencherCamposEdicao() {
+
+        binding.editTextNome.setText(
+            intent.getStringExtra("NOME") ?: ""
+        )
+
+        binding.editTextNomeresptext.setText(
+            intent.getStringExtra("RESPONSAVEL") ?: ""
+        )
+
+        binding.emailInputtlab.setText(
+            intent.getStringExtra("EMAIL") ?: ""
+        )
+
+        binding.editTextDataNascimento.setText(
+            intent.getStringExtra("DATA_NASC") ?: ""
+        )
+
+        binding.editTextDiagnostico.setText(
+            intent.getStringExtra("DIAGNOSTICO") ?: ""
+        )
+
+        // muda o texto do botão
+        binding.btnAddNewPatient.text = "Salvar alterações"
+    }
+
 
 
     private fun salvarPaciente() {
