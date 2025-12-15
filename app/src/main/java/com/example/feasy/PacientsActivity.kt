@@ -170,7 +170,10 @@ class PacientsActivity : AppCompatActivity() {
         intent.putExtra("DATA_NASC", paciente.usuarios.dataNascimento)
         intent.putExtra("DIAGNOSTICO", paciente.diagnostico)
         intent.putExtra("RESPONSAVEL", paciente.acompanhante)
-
+        intent.putExtra(
+            "PROFILE_PIC",
+            paciente.usuarios.profilePic
+        )
         startActivity(intent)
     }
 

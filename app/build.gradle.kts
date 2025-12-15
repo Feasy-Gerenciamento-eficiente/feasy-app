@@ -66,6 +66,10 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     implementation("com.google.android.material:material:1.11.0")
+    implementation("io.github.jan-tennert.supabase:storage-kt")
+    implementation("io.coil-kt:coil:2.6.0")
+
+
 
     // ----------------------------
     // SUPABASE (correto!)

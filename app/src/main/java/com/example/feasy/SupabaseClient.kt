@@ -8,6 +8,9 @@ import android.content.Context
 import io.github.jan.supabase.auth.SessionManager
 import io.github.jan.supabase.auth.user.UserSession
 import kotlinx.serialization.json.Json
+import io.github.jan.supabase.storage.Storage
+
+
 
 
 object SupabaseClientProvider {
@@ -30,6 +33,8 @@ object SupabaseClientProvider {
             }
             // CORREÇÃO: Removi o segundo 'install(Auth)' que estava duplicado
             install(Postgrest)
+            install(Storage)
+
         }
     }
 }

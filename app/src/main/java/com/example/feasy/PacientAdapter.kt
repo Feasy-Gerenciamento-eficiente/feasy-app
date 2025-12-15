@@ -10,6 +10,11 @@ import java.time.Period
 import java.time.format.DateTimeFormatter
 import android.content.Intent
 import com.example.feasy.ui.PatientDetailsActivity
+import coil.load
+import com.example.feasy.R
+import android.view.View
+
+
 
 class PacientAdapter(
     private var lista: List<PacienteComUsuario>,
@@ -41,6 +46,9 @@ class PacientAdapter(
 
         // 3. Diagnóstico (ID no XML: textDiagnosisValue)
         holder.binding.textDiagnosisValue.text = item.diagnostico
+
+
+
 
         // 4. Iniciais (ID no XML: textInitials)
         // Pega a primeira letra de cada nome (Limitado a 2 letras)
@@ -76,6 +84,34 @@ class PacientAdapter(
 
         holder.itemView.setOnClickListener {
             onAbrirDetalhes(item)
+        }
+
+        val fotoUrl = item.usuarios.profilePic
+
+        if (!fotoUrl.isNullOrEmpty()) {
+
+            // MOSTRA A FOTO
+            holder.binding.imageAvatar.load(fotoUrl) {
+                crossfade(true)
+                error(R.color.avatar_mint)
+            }
+
+            // ESCONDE AS INICIAIS
+            holder.binding.textInitials.visibility = View.GONE
+
+            // REMOVE FUNDO AZUL (opcional, mas recomendado)
+            holder.binding.imageAvatar.background = null
+
+        } else {
+
+            // SEM FOTO → MOSTRA INICIAIS
+            holder.binding.imageAvatar.setImageResource(android.R.color.transparent)
+
+            holder.binding.textInitials.text = iniciais
+            holder.binding.textInitials.visibility = View.VISIBLE
+
+            // RESTAURA FUNDO AZUL
+            holder.binding.imageAvatar.setBackgroundResource(R.drawable.avatar_background)
         }
 
 

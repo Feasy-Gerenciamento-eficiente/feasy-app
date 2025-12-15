@@ -17,8 +17,8 @@
         android:layout_height="wrap_content"
         android:padding="18dp">
 
-        <View
-            android:id="@+id/viewAvatarBackground"
+        <ImageView
+            android:id="@+id/imageAvatar"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@drawable/avatar_background"
@@ -34,10 +34,10 @@
             android:textColor="#2C3E50"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/viewAvatarBackground"
-            app:layout_constraintEnd_toEndOf="@id/viewAvatarBackground"
-            app:layout_constraintStart_toStartOf="@id/viewAvatarBackground"
-            app:layout_constraintTop_toTopOf="@id/viewAvatarBackground" />
+            app:layout_constraintBottom_toBottomOf="@id/imageAvatar"
+            app:layout_constraintEnd_toEndOf="@id/imageAvatar"
+            app:layout_constraintStart_toStartOf="@id/imageAvatar"
+            app:layout_constraintTop_toTopOf="@id/imageAvatar" />
 
         <TextView
             android:id="@+id/textPatientName"
@@ -51,8 +51,8 @@
             android:textColor="@color/figma_foreground"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/viewAvatarBackground"
-            app:layout_constraintTop_toTopOf="@id/viewAvatarBackground" />
+            app:layout_constraintStart_toEndOf="@id/imageAvatar"
+            app:layout_constraintTop_toTopOf="@id/imageAvatar" />
 
         <TextView
             android:id="@+id/textPatientId"
@@ -95,7 +95,7 @@
             android:layout_height="20dp"
             android:layout_marginTop="16dp"
             android:src="@drawable/calendar_icon"
-            app:layout_constraintTop_toBottomOf="@id/viewAvatarBackground"
+            app:layout_constraintTop_toBottomOf="@id/imageAvatar"
             app:tint="#69C7B5"
             app:layout_constraintStart_toStartOf="parent"/>
 

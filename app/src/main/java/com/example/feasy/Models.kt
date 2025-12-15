@@ -12,8 +12,10 @@ data class UsuarioDto(
     val nome: String,
     val email: String, // Email do responsável
     @SerialName("data_nascimento") val dataNascimento: String, // Formato YYYY-MM-DD
-    @SerialName("tipo_usuario") val tipoUsuario: String = "paciente"
+    @SerialName("tipo_usuario") val tipoUsuario: String = "paciente",
     // RG você não pediu no form, mas se tiver, coloque aqui
+    @SerialName("profile_pic")
+    val profilePic: String? = null
 )
 
 // Representa a tabela 'pacientes' da imagem

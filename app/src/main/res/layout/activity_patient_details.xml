@@ -49,6 +49,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:id="@+id/imageAvatar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="2dp"
@@ -217,29 +218,31 @@
                     android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@id/rowDiagnosis">
 
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nome do Acompanhante"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="12sp" />
+
                     <TextView
                         android:id="@+id/tvResponsavel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Responsável"
                         android:textColor="@color/titles"
                         android:textSize="14sp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Maria Silva e João Ferreira"
                         android:textColor="@color/titles"
                         android:textSize="14sp" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="12dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Responsáveis"
+                        android:text="Responsáveis "
                         android:textColor="@color/secondary_text"
                         android:textSize="12sp" />
 
