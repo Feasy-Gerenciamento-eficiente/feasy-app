@@ -44,11 +44,114 @@ class AddPacienteActivity : AppCompatActivity() {
         // Botão Cancelar
         binding.buttonCancelar.setOnClickListener { finish() }
 
-        // Botão "New Pacient" (Salvar)
+        // ADICIONADO ---- Botão "New Pacient" (Salvar)
         binding.btnAddNewPatient.setOnClickListener {
-            salvarPaciente()
+            if (usuarioIdParaEdicao == null) {
+                salvarPaciente()       // criação
+            } else {
+                atualizarPaciente()   // edição
+            }
+        }
+
+    }
+
+    //ADICIONADO ---
+    private fun atualizarPaciente() {
+
+        val usuarioId = usuarioIdParaEdicao ?: return
+
+        // 1. Pega os dados digitados
+        val nome = binding.editTextNome.text.toString().trim()
+        val nomeResponsavel = binding.editTextNomeresptext.text.toString().trim()
+        val email = binding.emailInputtlab.text.toString().trim()
+        val dataNascInput = binding.editTextDataNascimento.text.toString().trim()
+        val diagnostico = binding.editTextDiagnostico.text.toString().trim()
+
+        if (nome.isEmpty() || email.isEmpty() || dataNascInput.isEmpty()) {
+            Toast.makeText(this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // 2. Converte data para YYYY-MM-DD
+        val dataFormatada = try {
+            val partes = dataNascInput.split("/")
+            "${partes[2]}-${partes[1]}-${partes[0]}"
+        } catch (e: Exception) {
+            dataNascInput
+        }
+
+        scope.launch {
+            try {
+                // --- A) ATUALIZA USUÁRIO ---
+                SupabaseClientProvider.client
+                    .from("usuarios")
+                    .update(
+                        mapOf(
+                            "nome" to nome,
+                            "email" to email,
+                            "data_nascimento" to dataFormatada
+                        )
+                    ) {
+                        filter {
+                            eq("id", usuarioId)
+                        }
+                    }
+
+                // --- B) ATUALIZA PACIENTE ---
+                SupabaseClientProvider.client
+                    .from("pacientes")
+                    .update(
+                        mapOf(
+                            "diagnostico_inicial" to diagnostico,
+                            "acompanhante_emergencia" to nomeResponsavel
+                        )
+                    ) {
+                        filter {
+                            eq("usuario_id", usuarioId)
+                        }
+                    }
+
+                Toast.makeText(
+                    this@AddPacienteActivity,
+                    "Paciente atualizado com sucesso!",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+                finish() // fecha o modal
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(
+                    this@AddPacienteActivity,
+                    "Erro ao atualizar: ${e.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // ADICIONADO ---
     private fun entrarModoEdicao() {
