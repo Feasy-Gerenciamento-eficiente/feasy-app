@@ -8,12 +8,14 @@ import com.example.feasy.databinding.ItemPatientCardBinding // O nome vem do XML
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
+import android.content.Intent
+import com.example.feasy.ui.PatientDetailsActivity
 
-class PacientesAdapter(
+class PacientAdapter(
     private var lista: List<PacienteComUsuario>,
-    //ADICIONADO---
-    private val onEditarPaciente: (PacienteComUsuario) -> Unit
-) : RecyclerView.Adapter<PacientesAdapter.ViewHolder>() {
+    private val onEditarPaciente: (PacienteComUsuario) -> Unit,
+    private val onAbrirDetalhes: (PacienteComUsuario) -> Unit
+) : RecyclerView.Adapter<PacientAdapter.ViewHolder>() {
 
     inner class ViewHolder(val binding: ItemPatientCardBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -24,6 +26,9 @@ class PacientesAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = lista[position]
+        val paciente = lista[position]
+
+
         val usuario = item.usuarios // Dados vindos da tabela 'usuarios'
 
         // 1. Nome do Paciente (ID no XML: textPatientName)
@@ -68,10 +73,13 @@ class PacientesAdapter(
             holder.binding.textBirthDate.text = usuario.dataNascimento
         }
 
-        // DICA EXTRA: Configurar cliques nos ícones de Olho e Editar futuramente
-        holder.binding.iconEye.setOnClickListener {
-            // Lógica para visualizar detalhes...
+
+        holder.itemView.setOnClickListener {
+            onAbrirDetalhes(item)
         }
+
+
+
 
         // ADICIONADO ---
         holder.binding.iconEdit.setOnClickListener {

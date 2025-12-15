@@ -34,6 +34,7 @@ class AddPacienteActivity : AppCompatActivity() {
 
         // ADICIONADO ---
         if (usuarioIdParaEdicao != null) {
+            binding.textViewTitle.text = "Editar Paciente"
             preencherCamposEdicao()
         }
 

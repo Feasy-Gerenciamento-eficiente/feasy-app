@@ -7,7 +7,7 @@ import com.example.feasy.databinding.ActivityPacientsBinding
 import com.example.feasy.ui.AddPacienteActivity
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.feasy.ui.PacientesAdapter
+import com.example.feasy.ui.PacientAdapter
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Columns
 import kotlinx.coroutines.MainScope
@@ -21,7 +21,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Color
-
+import com.example.feasy.ui.PatientDetailsActivity
 
 
 class PacientsActivity : AppCompatActivity() {
@@ -33,7 +33,7 @@ class PacientsActivity : AppCompatActivity() {
     private var listaOriginal: List<PacienteComUsuario> = emptyList()
 
     // Variável para o Adapter
-    private lateinit var adapter: PacientesAdapter
+    private lateinit var adapter: PacientAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +45,16 @@ class PacientsActivity : AppCompatActivity() {
         // Inicializa o adapter vazio para não dar erro antes de carregar
 
         // ADICIONADO ---
-        adapter = PacientesAdapter(listaOriginal) { paciente ->
-            abrirEdicaoPaciente(paciente)
-        }
+        adapter = PacientAdapter(
+            listaOriginal,
+            onEditarPaciente = { paciente ->
+                abrirEdicaoPaciente(paciente)
+            },
+            onAbrirDetalhes = { paciente ->
+                abrirDetalhesPaciente(paciente)
+            }
+        )
+
 
 
         binding.recyclerViewPacientes.adapter = adapter
@@ -153,6 +160,20 @@ class PacientsActivity : AppCompatActivity() {
 
         startActivity(intent)
     }
+
+    private fun abrirDetalhesPaciente(paciente: PacienteComUsuario) {
+        val intent = Intent(this, PatientDetailsActivity::class.java)
+
+        intent.putExtra("USUARIO_ID", paciente.usuarioId)
+        intent.putExtra("NOME", paciente.usuarios.nome)
+        intent.putExtra("EMAIL", paciente.usuarios.email)
+        intent.putExtra("DATA_NASC", paciente.usuarios.dataNascimento)
+        intent.putExtra("DIAGNOSTICO", paciente.diagnostico)
+        intent.putExtra("RESPONSAVEL", paciente.acompanhante)
+
+        startActivity(intent)
+    }
+
 
 
 

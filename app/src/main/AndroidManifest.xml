@@ -25,6 +25,10 @@
             android:name=".PacientsActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".ui.PatientDetailsActivity"
+            android:exported="false" />
+
 
         <!-- Tela inicial → Login -->
         <activity
